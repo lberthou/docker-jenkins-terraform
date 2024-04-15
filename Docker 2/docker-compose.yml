@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "82:80"  # Mapping du port 82 de l'hôte sur le port 80 du conteneur WordPress
+    networks:
+      - redDocker  # Utilisation du réseau redDocker
+    depends_on:
+      - mariadb  # Dépendance à l'égard du service mariadb
+
+  mariadb:
+    image: mariadb:latest
+    networks:
+      - redDocker  # Utilisation du réseau redDocker
+    environment:
+      MYSQL_ROOT_PASSWORD: example  # Définition du mot de passe root de MariaDB
+
+networks:
+  redDocker:  # Définition du réseau redDocker
